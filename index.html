@@ -27,13 +27,13 @@
 		
 	} else {
 	
-	    const shadowRoot = document.getElementById('app').attachShadow({mode: 'open'});
-	    shadowRoot.innerHTML = `
-	      <style> #container { all: initial; } </style>
+		const shadowRoot = document.getElementById('app').attachShadow({mode: 'open'});
+		shadowRoot.innerHTML = `
+		  <style> #container { all: initial; } </style>
 		  <link rel=stylesheet href=shadow-style.css type=text/css>
-	      <div id=container>In the shadow, without style leaks.</div>
-	    `;
-	
+		  <div id=container>In the shadow, without style leaks.</div>
+		`;
+		
 		const app_container = shadowRoot.getElementById('container');
 		console.log('Shadow DOM entry point:', app_container); // Insert the shadow content into app_container
 		
