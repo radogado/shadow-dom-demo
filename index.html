@@ -1,0 +1,42 @@
+<style>
+	
+	* { /* Style leak test */
+		
+		font-size: 20px; 
+		color: green; 
+		text-decoration: underline;
+		font-weight: bold;
+		font-style: italic;
+
+	}
+
+</style>
+
+<p>Outside</p>
+
+<div id=app></div>
+
+<p>Outside</p>
+
+<script>
+
+	
+	if (!document.body.attachShadow) {
+		
+		console.log('Shadow DOM unsupported. Use iframe.')
+		
+	} else {
+	
+	    const shadowRoot = document.getElementById('app').attachShadow({mode: 'open'});
+	    shadowRoot.innerHTML = `
+	      <style> #container { all: initial; } </style>
+		  <link rel=stylesheet href=shadow-style.css type=text/css>
+	      <div id=container>In the shadow, without style leaks.</div>
+	    `;
+	
+		const app_container = shadowRoot.getElementById('container');
+		console.log('Shadow DOM entry point:', app_container); // Insert the shadow content into app_container
+		
+	}
+	
+</script>
