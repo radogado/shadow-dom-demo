@@ -14,13 +14,11 @@
 
 <p>Outside</p>
 
+<!-- Start -->
+
 <div id="app"></div>
 
-<p>Outside</p>
-
 <script>
-
-	let app_container = null;
 
 	if (!document.body.attachShadow) {
 		
@@ -35,16 +33,16 @@
 		  <div id="container">Content in the shadow, without style leaks</div>
 		`;
 		
-		app_container = shadowRoot.getElementById('container');
-
-		let script = document.createElement('script');
-		script.setAttribute('src', 'shadow-script.js');
-		app_container.appendChild(script);
-
-		console.log('Shadow DOM entry point:', app_container); // Insert the shadow content into app_container
+		var app_container = shadowRoot.getElementById('container');
 		
 	}
 	
 </script>
+
+<script src="shadow-script.js" type="text/javascript"></script>
+
+<!-- End -->
+
+<p>Outside</p>
 
 <a href=https://github.com/radogado/shadow-dom-demo>GitHub page</a>
