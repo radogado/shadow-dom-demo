@@ -1,6 +1,6 @@
 <style>
 	
-	* { /* Style leak test */
+	* { /* Style leak test. * is the strongest and underline leaks in Chrome. With other selectors, there are no leaks. */
 		
 		font-size: 20px; 
 		color: green; 
@@ -14,11 +14,13 @@
 
 <p>Outside</p>
 
-<div id=app></div>
+<div id="app"></div>
 
 <p>Outside</p>
 
 <script>
+
+	let app_container = null;
 
 	if (!document.body.attachShadow) {
 		
@@ -30,10 +32,15 @@
 		shadowRoot.innerHTML = `
 		  <style> #container { all: initial; } </style>
 		  <link rel=stylesheet href=shadow-style.css type=text/css>
-		  <div id=container>In the shadow, without style leaks.</div>
+		  <div id="container">Content in the shadow, without style leaks</div>
 		`;
 		
-		const app_container = shadowRoot.getElementById('container');
+		app_container = shadowRoot.getElementById('container');
+
+		let script = document.createElement('script');
+		script.setAttribute('src', 'shadow-script.js');
+		app_container.appendChild(script);
+
 		console.log('Shadow DOM entry point:', app_container); // Insert the shadow content into app_container
 		
 	}
