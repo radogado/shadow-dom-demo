@@ -6,4 +6,4 @@ The #app element gets a Shadow DOM child, which can be accessed by app_container
 
 **shadow-style.css** applies only to the Shadow DOM element inside #app
 
-**shadow-script.js** uses app_container as Shadow DOM's host element
+**shadow-script.js** references the Shadow DOM by the app_container variable
